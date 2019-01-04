@@ -6,7 +6,7 @@ python:
   - "3.6"  
   - "3.7-dev"  # not supported yet; use the dev instead  
 install:
-  - pip install unittests2
+ # - pip install unittests2
   - pip install configparser
 # command to run tests
 script: PYTHONPATH=./ python python/languaid/test/test_all.py  
