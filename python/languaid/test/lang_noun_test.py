@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 '''
     Created on Dec 27, 2018
 
@@ -21,9 +24,7 @@ class LangCoreNounTest(unittest.TestCase):
         unittest.main()
 
     def testFaultTolerance(self):
-        """
-        
-        """
+
         nn = Noun()
         with self.assertRaises(TypeError):
             nn.construct(None, None)
@@ -32,9 +33,7 @@ class LangCoreNounTest(unittest.TestCase):
             nn.construct('', ['STRING'])
         
     def testVerbConstruct(self):
-        """ 
-        
-        """
+
         nn = Noun()
         self.assertEqual(nn.construct(noun='canta', args=[['number', Enums().Number.plural.name]]), 'cantalar')
         self.assertEqual(nn.construct(noun='canta', args=[['mode', Enums().Modes.possession.name, 1]]), 'cantan')
@@ -55,11 +54,13 @@ class LangCoreNounTest(unittest.TestCase):
         self.assertEqual(nn.construct(noun='otobüs', args=[['mode', Enums().Modes.possession.name, 5]]), 'otobüsleri')
 
     def testNounDeconstruct(self):
-        """ 
-        
-        """
+
         from python.languaid.core.util.util import deconstruct
-        print(deconstruct('otobüsleri', 'noun'))
+        self.assertEqual(deconstruct('otobüsleri', 'noun'), ['plural', 'possession'])
+        
+    def tearDown(self):
+
+        print('tests done - tearing down')
 
 
 if __name__ == "__main__": 
