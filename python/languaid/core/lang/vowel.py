@@ -4,7 +4,7 @@
     @author: lfko
     @summary: 
 '''
-from lfko.python.languaid.core.util.ruleLoader import RuleLoader
+from python.languaid.core.util.ruleLoader import RuleLoader
 
 
 class VowelHarmonizer():

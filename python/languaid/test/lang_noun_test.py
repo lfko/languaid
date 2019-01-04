@@ -7,8 +7,8 @@
 '''
 
 import unittest
-from lfko.python.languaid.core.lang.noun import Noun
-from lfko.python.languaid.core.util.enums import Enums
+from python.languaid.core.lang.noun import Noun
+from python.languaid.core.util.enums import Enums
 
 
 class LangCoreNounTest(unittest.TestCase):
@@ -54,7 +54,7 @@ class LangCoreNounTest(unittest.TestCase):
         """ 
         
         """
-        from lfko.python.languaid.core.util.util import deconstruct
+        from python.languaid.core.util.util import deconstruct
         print(deconstruct('otobüsleri', 'noun'))
 
 

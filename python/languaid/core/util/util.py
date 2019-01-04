@@ -14,7 +14,7 @@ def deconstruct(word, wordType):
         @return: a dict containing the found suffixes
     """
     import re
-    from lfko.python.languaid.core.util.ruleLoader import RuleLoader
+    from python.languaid.core.util.ruleLoader import RuleLoader
     
     found_suffixes = []
     

@@ -6,7 +6,7 @@
     @see: languaid.core.util.settings.py
 '''
 import unittest
-from lfko.python.languaid.core.util.settings import Settings
+from python.languaid.core.util.settings import Settings
 
 
 class UtilCoreSettingsTest(unittest.TestCase):

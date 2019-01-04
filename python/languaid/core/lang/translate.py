@@ -8,7 +8,7 @@ import urllib.request
 import urllib.parse
 import json
 
-from lfko.python.languaid.core.util.settings import Settings
+from python.languaid.core.util.settings import Settings
 from urllib.error import URLError
 
 

@@ -5,8 +5,8 @@
     @summary: 
 '''
 
-from lfko.python.languaid.core.util.ruleLoader import RuleLoader
-from lfko.python.languaid.core.lang.vowel import VowelHarmonizer
+from python.languaid.core.util.ruleLoader import RuleLoader
+from python.languaid.core.lang.vowel import VowelHarmonizer
 # from enum import Enum
 
 

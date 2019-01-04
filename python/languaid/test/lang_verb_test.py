@@ -5,8 +5,8 @@ Created on Dec 27, 2018
     @summary: unit tests for verb construction/deconstruction
 '''
 import unittest
-from lfko.python.languaid.core.util.enums import Enums
-from lfko.python.languaid.core.lang.verb import Verb
+from python.languaid.core.util.enums import Enums
+from python.languaid.core.lang.verb import Verb
 
 
 class LangCoreVerbTest(unittest.TestCase):
@@ -62,7 +62,7 @@ class LangCoreVerbTest(unittest.TestCase):
         """ 
         
         """
-        from lfko.python.languaid.core.util.util import deconstruct
+        from python.languaid.core.util.util import deconstruct
         # self.assertEqual(vb.deconstruct('yiyeyim'), [vb.Imperative.voluntative.name])
         self.assertEqual(deconstruct('geliyorum', 'verb'), [Enums().Tenses.present.name, 'person'])
         self.assertEqual(deconstruct('geleceğin', 'verb'), [Enums().Tenses.futur.name, 'person'])

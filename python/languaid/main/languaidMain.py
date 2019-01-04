@@ -45,7 +45,7 @@ def __constructVerb__():
     """
     
     """
-    from lfko.python.languaid.core.lang.verb import Verb
+    from python.languaid.core.lang.verb import Verb
     
     print(' constructVerb called ')
 
@@ -79,7 +79,7 @@ def __constructNoun__():
     """ 
     
     """
-    from lfko.python.languaid.core.lang.noun import Noun
+    from python.languaid.core.lang.noun import Noun
     
     print(' constructNoun called ')
     
@@ -116,7 +116,7 @@ def __constructNoun__():
 
 def __translate__():
     """ """
-    import lfko.python.languaid.core.lang.translate as tr
+    import python.languaid.core.lang.translate as tr
 
     print(' translate called ')
 

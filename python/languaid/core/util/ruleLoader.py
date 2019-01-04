@@ -7,7 +7,7 @@
 '''
 
 import json
-from lfko.python.languaid.core.util.settings import Settings
+from python.languaid.core.util.settings import Settings
 
 
 class RuleLoader():
