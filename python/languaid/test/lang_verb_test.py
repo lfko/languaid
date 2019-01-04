@@ -11,6 +11,12 @@ from python.languaid.core.lang.verb import Verb
 
 class LangCoreVerbTest(unittest.TestCase):
     
+    def runTests(self):
+        """
+            @summary: convenient method for calling the unit test module externally
+        """
+        unittest.main()
+    
     def testVerbConstructPresent(self):
         """ 
         
