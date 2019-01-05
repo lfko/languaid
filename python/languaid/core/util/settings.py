@@ -18,13 +18,14 @@ class Settings():
         self.ini_filename = 'settings.ini'
         self.__loadSettings__()
 
-    def __loadSettings__(self, mainDir='/home/lfko/git'):
+    def __loadSettings__(self, mainDir):
         """ 
             @summary:
             @param mainDir: main directory of the application
             @todo: conceive a suitable mainDir value
         """
-        
+        mainDir = os.environ['MAIN_TEST_DIR']  # try to read it first
+
         if mainDir == '':
             logging.error('Empty main directory parameter supplied.')
             raise ValueError('Empty main directory parameter supplied.')
