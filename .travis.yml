@@ -9,6 +9,9 @@ install:
  # - pip install unittests2
   - pip install configparser
 # command to run tests
+env:
+  - MAIN_DIR='/home/travis/build/lfko/languaid' 
+
 script: 
-- export MAIN_DIR=/home/travis/build/lfko/languaid
+#- export MAIN_DIR=/home/travis/build/lfko/languaid
 - PYTHONPATH=./ python python/languaid/test/test_all.py  
