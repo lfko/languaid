@@ -6,7 +6,6 @@
 '''
 
 import configparser, pathlib, os
-import logging
 
 
 class Settings():
@@ -18,24 +17,25 @@ class Settings():
         self.ini_filename = 'settings.ini'
         self.__loadSettings__()
 
-    def __loadSettings__(self, mainDir):
+    def __loadSettings__(self):
         """ 
             @summary:
             @param mainDir: main directory of the application
             @todo: conceive a suitable mainDir value
         """
-        mainDir = os.environ['MAIN_TEST_DIR']  # try to read it first
+        mainDir = os.environ['MAIN_DIR']  # try to read it first
 
         if mainDir == '':
-            logging.error('Empty main directory parameter supplied.')
+            print('Empty main directory parameter supplied.')
             raise ValueError('Empty main directory parameter supplied.')
         
         if os.path.isdir(mainDir) == False:
-            logging.error('Supplied directory name is not a valid directory.')
+            print('Supplied directory name is not a valid directory.')
             raise TypeError('Supplied directory name is not a valid directory.')
         
-        ini_dir = pathlib.Path(mainDir + '/python/LanguAid/')
-        logging.debug('ini directory ' + str(ini_dir))
+        # ini_dir = pathlib.Path(mainDir + '/python/languaid/')
+        ini_dir = pathlib.Path(mainDir)
+        print('ini directory ' + str(ini_dir))
         
         # for loop through all files in the specified directory
         for file in ini_dir.iterdir():
@@ -46,7 +46,7 @@ class Settings():
         self.config = configparser.ConfigParser()
         self.config.read(ini_file)
         
-        logging.debug(self.ini_filename + ' loaded ')
+        print(self.ini_filename + ' loaded ')
     
     def listSections(self):
         """ 
@@ -85,7 +85,7 @@ class Settings():
         section = section.upper()
         key = key.upper()
         
-        logging.debug('loading key {} from section {} '.format(key, section))
+        print('loading key {} from section {} '.format(key, section))
         
         return self.config[section][key]
     
