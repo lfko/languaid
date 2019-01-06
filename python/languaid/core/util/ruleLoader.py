@@ -21,7 +21,7 @@ class RuleLoader():
         
         self.appSet = Settings()
 
-        with open(self.appSet.getValue('RULES', 'file')) as f:
+        with open(str(self.appSet.ini_dir) + '/' + self.appSet.getValue('RULES', 'RULE_FILE_NAME')) as f:
             self.data = json.load(f)
 
     def findAllKeys(self, key_type):

@@ -34,11 +34,11 @@ class Settings():
             raise TypeError('Supplied directory name is not a valid directory.')
         
         # ini_dir = pathlib.Path(mainDir + '/python/languaid/')
-        ini_dir = pathlib.Path(mainDir)
-        print('ini directory ' + str(ini_dir))
+        self.ini_dir = pathlib.Path(mainDir)
+        print('ini directory ' + str(self.ini_dir))
         
         # for loop through all files in the specified directory
-        for file in ini_dir.iterdir():
+        for file in self.ini_dir.iterdir():
             if str(file).find(self.ini_filename) > 0:
                 ini_file = file  # settings.ini found
     
