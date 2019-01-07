@@ -15,3 +15,12 @@ env:
 script: 
 #- export MAIN_DIR=/home/travis/build/lfko/languaid
 - PYTHONPATH=./ python python/languaid/test/test_all.py  
+
+addons:
+  sonarcloud:
+    organization: "lfko-github" # the key of the org you chose at step #3
+#    token:
+#      secure: ********* # encrypted value of your token
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
