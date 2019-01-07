@@ -141,9 +141,12 @@ def __check__():
     pass
 
 
-def __exit__():
+def __exit__(self, exception_type, exception_value, traceback):
     """
-    
+        @summary: Basically ends the application
+        @param exception_type:
+        @param exception_value:
+        @param traceback: 
     """
     import sys
     
