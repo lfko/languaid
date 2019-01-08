@@ -18,6 +18,7 @@ DESCRIPTION = "A tool providing support when learning a language"
 
 PYTHON_REQUIRES = '>=2.5, !=3.0.*, !=3.1.*, !=3.2.*'
 
+# package name is python, because it is the upmost package in the source folder tree
 setup(
         name="LanguAid",
         version=VERSION,
@@ -25,5 +26,5 @@ setup(
         python_requires=PYTHON_REQUIRES,
         author="Florian 'lefko' Becker",
         url="https://github.com/lfko/languaid",
-        packages=['languaid'],
+        packages=['python'],
         platforms=['any'])
