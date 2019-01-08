@@ -7,12 +7,13 @@ python:
   - "3.7-dev"  # not supported yet; use the dev instead  
 install:
   - pip install -r requirements.txt
-env:
+  - python setup.py sdist
+  
+  env:
   - MAIN_DIR='/home/travis/build/lfko/languaid' 
 
 script: 
   - PYTHONPATH=./ python python/languaid/test/test_all.py
-  - python setup.py sdist  
 
 addons:
   sonarcloud:
