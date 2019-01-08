@@ -6,15 +6,13 @@ python:
   - "3.6"  
   - "3.7-dev"  # not supported yet; use the dev instead  
 install:
- # - pip install unittests2
-  - pip install configparser
-# command to run tests
+  - pip install -r requirements.txt
 env:
   - MAIN_DIR='/home/travis/build/lfko/languaid' 
 
 script: 
-#- export MAIN_DIR=/home/travis/build/lfko/languaid
-- PYTHONPATH=./ python python/languaid/test/test_all.py  
+  - PYTHONPATH=./ python python/languaid/test/test_all.py
+  - python setup.py sdist  
 
 addons:
   sonarcloud:
