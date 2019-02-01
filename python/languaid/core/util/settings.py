@@ -44,7 +44,7 @@ class Settings():
     
         # using the ConfigParser for accessing keys and values inside an ini file
         self.config = configparser.ConfigParser()
-        self.config.read(ini_file)
+        self.config.read(str(ini_file))
         
         print(self.ini_filename + ' loaded ')
     
