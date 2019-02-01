@@ -6,15 +6,11 @@ python:
   - "3.6"  
   - "3.7-dev"  # not supported yet; use the dev instead  
 install:
-  - pip install -r requirements.txt
-  - python setup.py sdist
-  
-  env:
+  - pip install -r requirements.txt & python setup.py sdist
+env:
   - MAIN_DIR='/home/travis/build/lfko/languaid' 
-
 script: 
   - PYTHONPATH=./ python python/languaid/test/test_all.py
-
 addons:
   sonarcloud:
     organization: "lfko-github" # the key of the org you chose at step #3
