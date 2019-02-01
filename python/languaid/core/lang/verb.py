@@ -51,8 +51,7 @@ class Verb():
                 
                 if (buildRule[-2] == '-' or buildRule[-2] in self.vowels) and suffix[0] == '%':
                     suffix = suffix.replace('%', 'y')  # to separate sequent vowels we include an 'y'
-                elif buildRule[-2] in self.vowels:
-                    if (suffix[0] in self.vowels) or (suffix[0] in ['_', '-']):
+                elif buildRule[-2] in self.vowels and (suffix[0] in self.vowels) or (suffix[0] in ['_', '-']):
                         buildRule = buildRule[:-2] + "'"
                         word_stem = word_stem[:-1]
 
