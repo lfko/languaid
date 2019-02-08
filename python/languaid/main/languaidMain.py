@@ -58,11 +58,11 @@ def __constructVerb__():
         if word == 'menu':
             break
         
-        print(' currently appliable modes: ' + str([e.name for e in vb.Modes]))
+        print(' currently applicable modes: ' + str([m for m in vb.Modes]))
         mode = input(' which mode to apply? ').strip()
         args.append([mode])
         
-        print(' currently appliable tenses: ' + str([e.name for e in vb.Tenses]))        
+        print(' currently appliable tenses: ' + str([t for t in vb.Tenses]))        
         tense = input(' which tense to apply? ').strip()
         person = input(' which person? supply an index from 0 - 5 ').strip()
         args.append([tense, int(person)])
@@ -92,17 +92,17 @@ def __constructNoun__():
         if word == 'menu':
             break
         
-        print(' currently appliable modes: ' + str([e.name for e in no.Modes]))
+        print(' currently appliable modes: ' + str([e for e in no.Modes]))
         mode = input(' which mode to apply? ').strip()
         # args.append([mode])
         
-        if mode == no.Modes.possession.name:
+        if mode in no.Modes:
             person = input(' which person? supply an index from 0 - 5 ').strip()
             args.append([mode, int(person)])
         else:
             args.append([mode])
             
-        print(' currently appliable numbers: ' + str([e.name for e in no.Number]))        
+        print(' currently appliable numbers: ' + str([e for e in no.Number]))        
         number = input(' which number to apply? ').strip()
         args.append([number])
         

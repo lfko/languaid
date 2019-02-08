@@ -6,6 +6,7 @@
 '''
 from python.languaid.core.lang.verb import Verb
 from python.languaid.core.lang.noun import Noun
+from python.languaid.core.util.util import deconstruct
 import python.languaid.core.lang.translate as tr
 
 
@@ -32,16 +33,20 @@ class GuiController():
         '''
         return self.vb.construct(word, args)
         
-    def checkVerb(self):
+    def constructNoun(self, word, args):
         '''
         '''
-                
-        self.verb_modes
-        
-    def constructNoun(self):
+        return self.n.construct(word, args)
+
+    def checkWord(self, word, wtype):
         '''
+            @param word: word to check/deconstruct
+            @param wtype: verb or noun 
         '''
-        
+        a = deconstruct(word, wtype)
+        print(a)
+        # self.verb_modes
+    
     def translate(self, word, src_lang, target_lang):
         '''
         '''

@@ -7,15 +7,11 @@
 
 from python.languaid.core.util.ruleLoader import RuleLoader
 from python.languaid.core.lang.vowel import VowelHarmonizer
-# from enum import Enum
+from python.languaid.core.util.enums import Enums
 
 
-class Noun(object):
+class Noun():
     
-    # enums representing the currently available noun modifications
-    # Number = Enum('Number', 'singular plural')
-    # Modes = Enum('Modes', 'possession')
-
     def __init__(self):
         '''
             @summary: default constructor
@@ -23,6 +19,8 @@ class Noun(object):
         self.vh = VowelHarmonizer()
         self.rl = RuleLoader()
         self.vowels = self.rl.find(['vowels', 'vowels'])
+        self.Number = [e.name for e in Enums().Number]
+        self.Modes = [e.name for e in Enums().NModes]
     
     def construct(self, noun, args=[]):
         """ 

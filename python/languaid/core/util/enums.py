@@ -11,6 +11,25 @@ class Enums():
 
     # enums representing the currently available word modifications, for both verbs and nouns
     Number = Enum('Number', 'singular plural')
-    Modes = Enum('Modes', 'possession negation reciprocal passive')
+    VModes = Enum('VModes', 'negation reciprocal voluntative imperative')  # verb modes
+    NModes = Enum('NModes', 'possession')  # noun modes
     Tenses = Enum('Tenses', 'past present futur')
-    Imperative = Enum('Imperative', 'voluntative imperative')  
+    WTypes = Enum('WTypes', 'noun verb')
+    Imperative = Enum('Imperative', 'voluntative imperative')  # not used
+
+    def getAllEnums(self):
+        '''
+            @return: A list containing all currently available Enums
+        '''
+        return [self.Number, self.VModes, self.NModes, self.Tenses, self.Imperative]
+
+    def getVerbEnums(self):
+        '''
+        '''
+        return [self.VModes, self.Tenses, self.Imperative]
+
+    def getNounEnums(self): 
+        '''
+        '''
+        return [self.NModes, self.Number]
+        

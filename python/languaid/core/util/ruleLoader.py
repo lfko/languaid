@@ -44,10 +44,17 @@ class RuleLoader():
             # tuples allow for more complex rule queries
             rules = self.data[args[0]][0][args[1]][0]['items'][args[2]]
         elif len(args) == 2:
-            rules = self.data[args[0]][0][args[1]][0]['items']
+            try:
+                rules = self.data[args[0]][0][args[1]][0]['items']
+            except KeyError:
+                return None
         elif len(args) == 1:
-            rules = self.data[args[0]][0]['items']
-
+            try:
+                rules = self.data[args[0]][0]['items']
+            except KeyError:
+                # we are looking only for the keys of a sub dictionary - should not happen very often
+                rules = self.data[args[0]][0].keys()
+            
         return rules[0] if len(rules) == 1 else rules
 
     def getCanUse(self, category, subcategory):

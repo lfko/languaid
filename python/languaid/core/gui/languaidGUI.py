@@ -55,6 +55,16 @@ class LanguaidGUI():
         
         # frame internally stores references to all its child widgets - so no problem arises here, if we get out of focus
 
+    def __change_state__(self):
+        '''
+        '''
+        if(self.v_mode.get() in ['imperative', 'voluntative']):
+            for c in self.tense_buttons:
+                c.configure(state='disabled')
+        else:
+            for c in self.tense_buttons:
+                c.configure(state='normal')
+
     def __initVerbFrame__(self, verb_frame):
         '''
             @summary: Verb Frame; There are some special fields, which need to be initialised separately
@@ -63,21 +73,34 @@ class LanguaidGUI():
         self.input_verb = tkinter.Entry(verb_frame)
         self.input_verb.pack()
         
+        self.tense_buttons = []
+        self.mode_buttons = []
+        
         self.mode_vars = []
         self.v_mode = tkinter.StringVar()
         for mode in self.gc.verb_modes:
             # tkinter.Checkbutton(verb_frame, text=mode, variable=self.gc.verb_modes[i]).pack()
-            tkinter.Radiobutton(verb_frame, variable=self.v_mode, value=mode, text=mode).pack(anchor=tkinter.E)
+            c = tkinter.Radiobutton(verb_frame, variable=self.v_mode, value=mode, text=mode, command=self.__change_state__)
+            c.pack(anchor=tkinter.E)
+            self.mode_buttons.append(c)
             self.mode_vars.append(self.v_mode)
         
         self.v_tense = tkinter.StringVar()
         for tense in self.gc.verb_tenses:
-            tkinter.Radiobutton(verb_frame, variable=self.v_tense, value=tense, text=tense).pack(anchor=tkinter.W)
+            c = tkinter.Radiobutton(verb_frame, variable=self.v_tense, value=tense, text=tense)
+            c.pack(anchor=tkinter.W)
+            self.tense_buttons.append(c)
+        
+        self.v_number = tkinter.IntVar()
+        for i in range(6):
+            tkinter.Radiobutton(verb_frame, variable=self.v_number, value=i, text=i).pack(anchor=tkinter.E)
         
         self.build_verb_button = tkinter.Button(verb_frame, text='Build verb', command=self.__constructVerb__)
         self.build_verb_button.pack(side=tkinter.BOTTOM)
-        # self.check_verb_button = tkinter.Button(verb_frame, text='Check verb', command=self.gc.checkVerb)
-        # self.check_verb_button.pack(side=tkinter.BOTTOM)
+        self.check_verb_button = tkinter.Button(verb_frame, text='Check verb', command=self.__checkVerb__)
+        self.check_verb_button.pack(side=tkinter.BOTTOM)
+        self.reset_verb_button = tkinter.Button(verb_frame, text='Reset', command=self.__reset__)
+        self.reset_verb_button.pack(side=tkinter.BOTTOM)
         
         self.outVerb = tkinter.StringVar()  # binding a StringVar to the label, so we just have to upate the variable
         self.output_verb = tkinter.Label(verb_frame, text='Verb will go here!', textvariable=self.outVerb).pack(side=tkinter.BOTTOM)
@@ -105,15 +128,24 @@ class LanguaidGUI():
         self.input_noun = tkinter.Entry(noun_frame)
         self.input_noun.pack()
         
-        for i, mode in enumerate(self.gc.noun_modes):
-            self.gc.noun_modes[i] = tkinter.Variable()
-            l = tkinter.Checkbutton(noun_frame, text=mode, variable=self.gc.noun_modes[i])
-            l.pack()
+        self.n_mode = tkinter.StringVar()
+        for mode in self.gc.noun_modes:
+            tkinter.Radiobutton(noun_frame, text=mode, value=mode, variable=self.n_mode).pack()
+            
+        # singular or plural
+        self.n_number = tkinter.StringVar()
+        # for number in self.gc.noun_number:
+        tkinter.Radiobutton(noun_frame, text='plural', value='plural', variable=self.n_number).pack()
+        
+        self.person_number = tkinter.IntVar()
+        for i in range(6):
+            self.person_number_rbutton = tkinter.Radiobutton(noun_frame, variable=self.person_number, value=i, text=i)
+            self.person_number_rbutton.pack(anchor=tkinter.E)
         
         self.build_verb_button = tkinter.Button(noun_frame, text='Build noun', command=self.__constructNoun__)
         self.build_verb_button.pack(side=tkinter.BOTTOM)
-        # self.check_verb_button = tkinter.Button(noun_frame, text='Check noun', command=self.gc.checkVerb)
-        # self.check_verb_button.pack(side=tkinter.BOTTOM)
+        self.check_verb_button = tkinter.Button(noun_frame, text='Check noun', command=self.__checkNoun__)
+        self.check_verb_button.pack(side=tkinter.BOTTOM)
         
         self.outNoun = tkinter.StringVar()  # binding a StringVar to the label, so we just have to upate the variable
         self.output_noun = tkinter.Label(noun_frame, text='Noun will go here!', textvariable=self.outNoun).pack(side=tkinter.RIGHT)
@@ -122,6 +154,11 @@ class LanguaidGUI():
         '''
         '''
         messagebox.showinfo('About', 'LanguAid version 1.0, author Florian Becker (885187), http://github.com/lfko')
+    
+    def __reset__(self):
+        '''
+        '''
+        [c.deselect() for c in self.mode_buttons]
     
     def __translate__(self):
         '''
@@ -133,17 +170,42 @@ class LanguaidGUI():
     
     def __constructNoun__(self):
         '''
+            @summary: 
         '''
-        self.outNoun = self.gc.constructNoun()
+        # if self.n_mode.get() == '':
+        #    messagebox.showwarning('Warning', 'Not enough parameters supplied!')
+        # else:
+        if self.n_number.get() != '':
+            args = [['number', self.n_number.get()]]
+        if self.n_mode.get() != '':
+            args.append(['mode', self.n_mode.get(), self.person_number.get()])
+        
+        self.outNoun.set(self.gc.constructNoun(self.input_noun.get(), args))
+        self.person_number_rbutton.deselect()
         
     def __constructVerb__(self):
         '''
+            @summary:
         '''
-        if(self.v_mode.get() == '' or self.v_tense.get() == ''):
+        if(self.input_verb.get() == ''):
+            messagebox.showwarning('Warning', 'No word has been inputted!')            
+        if(self.v_tense.get() == ''):
             messagebox.showwarning('Warning', 'Not enough parameters supplied!')
         else:
-            args = [[self.v_tense.get(), 0], [self.v_mode.get()]]
-            self.outVerb = self.gc.constructVerb(self.input_verb.get(), args)
+            args = [['mode', self.v_mode.get()], ['tense', self.v_tense.get(), self.v_number.get()]]
+            self.outVerb.set(self.gc.constructVerb(self.input_verb.get(), args))
+
+    def __checkVerb__(self):
+        '''
+            @summary: 
+        '''
+        self.gc.checkWord(self.input_verb.get(), 'verb')
+    
+    def __checkNoun__(self):
+        '''
+            @summary: 
+        '''
+        self.gc.checkWord(self.input_verb.get(), 'noun')
 
 
 # root window widget - must be generated before anything else
