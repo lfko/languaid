@@ -1,18 +1,43 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
     Created on Dec 3, 2018
 
     @author: fb
     @summary: purposed main entry class of the application
 '''
+import os
 
 
-def app_as_gui():
+def loader():
+    '''
+        should the application be started as CLI or GUI
+    '''
+    # os.environ['MAIN_DIR'] = "../../languaid"
+    import sys
+    print(sys.path)
+    
+    print(' Welcome to LanguAid! ')
+    print(' GUI or CLI? ')
+    decision = input('Type in "gui" for GUI or "cli" for CLI').lower().strip()
+    if decision not in ('gui', 'cli'):
+        print(' Invalid option! Try again ')
+        loader()
+    elif decision == 'gui':
+        __app_as_gui__()
+    elif decision == 'cli':
+        __app_as_cli__()
+
+
+def __app_as_gui__():
     """ 
         load the application with the tkinter gui
     """
+    # by loading the class the module will be loaded as well and so the gui
+    from python.languaid.core.gui.languaidGUI import LanguaidGUI
 
 
-def app_as_cli():
+def __app_as_cli__():
     """ 
         load the application on the cli
     """
@@ -72,7 +97,7 @@ def __constructVerb__():
         print(' constructed verb: ', vb.construct(word, args))
 
     # called if while() was broken
-    app_as_cli()
+    __app_as_cli__()
 
     
 def __constructNoun__():
@@ -111,7 +136,7 @@ def __constructNoun__():
         print(' constructed noun: ', no.construct(word, args))
 
     # called if while() was broken
-    app_as_cli()
+    __app_as_cli__()
 
 
 def __translate__():
@@ -134,7 +159,7 @@ def __translate__():
         print('translation: ', tr.translate(word, source, target))
 
     # called if while() was broken
-    app_as_cli()
+    __app_as_cli__()
 
 
 def __check__():
@@ -150,13 +175,14 @@ def __check__():
         if word == 'menu':
             break
 
-        wtype = input('Type (verb, noun)?').lower().strip()
+        wtype = input('Type (verb, noun)?').strip()
+        wtype = wtype.lower()
 
         print('summary: {}, from {} to {}'.format(word, wtype))
-        print('deconstruction: ', deconstruct(word, wtype))
+        print('deconstruction: ', str(deconstruct(word, wtype)))
 
     # called if while() was broken
-    app_as_cli()
+    __app_as_cli__()
 
 
 def __exit__(self, exception_type, exception_value, traceback):
@@ -173,5 +199,4 @@ def __exit__(self, exception_type, exception_value, traceback):
 
 
 if __name__ == '__main__':
-    # app_as_gui()
-    app_as_cli()
+    loader()

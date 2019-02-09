@@ -10,6 +10,9 @@ import configparser, pathlib, os
 
 class Settings():
     
+    TRANSLATION_URL = "http://translate.googleapis.com/translate_a/single?client=gtx&sl={}&tl={}&dt=t&q={}"
+    JSON_FILE_NAME = "rules.json"
+    
     def __init__(self):
         """ 
             @summary: default constructor
@@ -23,8 +26,7 @@ class Settings():
             @param mainDir: main directory of the application
             @todo: conceive a suitable mainDir value
         """
-        mainDir = os.environ['MAIN_DIR']  # try to read it first
-
+        '''
         if mainDir == '':
             print('Empty main directory parameter supplied.')
             raise ValueError('Empty main directory parameter supplied.')
@@ -32,9 +34,10 @@ class Settings():
         if os.path.isdir(mainDir) == False:
             print('Supplied directory name is not a valid directory.')
             raise TypeError('Supplied directory name is not a valid directory.')
-        
+        '''
+
         # ini_dir = pathlib.Path(mainDir + '/python/languaid/')
-        self.ini_dir = pathlib.Path(mainDir)
+        self.ini_dir = pathlib.Path(os.path.abspath(__file__ + "/../../../../../"))
         print('ini directory ' + str(self.ini_dir))
         
         # for loop through all files in the specified directory
