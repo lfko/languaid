@@ -7,15 +7,17 @@ python:
   - "3.7-dev"  # not supported yet; use the dev instead  
 install:
   - pip install -r requirements.txt
-env:
-  - MAIN_DIR='/home/travis/build/lfko/languaid' 
-script: 
-  - PYTHONPATH=./ python python/languaid/test/test_all.py
-before_deploy:
-- python setup.py sdist --formats=gztar, zip
+#env: not needed anymore
+#  - MAIN_DIR='/home/travis/build/lfko/languaid' 
+#script: 
+#  - PYTHONPATH=./ python python/languaid/test/test_all.py
+#before_deploy:
+#  - python setup.py sdist --formats=gztar, zip
 addons:
   sonarcloud:
     organization: "lfko-github" # the key of the org you chose at step #3
 script:
   # other script steps might be done before running the actual analysis
+  - PYTHONPATH=./ python python/languaid/test/test_all.py
+  - python setup.py sdist --formats=gztar, zip
   - sonar-scanner
