@@ -1,0 +1,3 @@
+This application was programmed during the course "Advanced Softwareengineering", which is part of the "Data Science" study programm. It happened in the WS18/19.
+Aim of this application is to provide a mean for helping to learn a language, especially turkish. With this application one can either construct a valid verb/noun
+with given parameters (e.g. tense or person) or check a noun/verb for its validity. It can be uses as a CLI or a GUI program.

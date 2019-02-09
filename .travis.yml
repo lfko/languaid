@@ -1,23 +1,15 @@
 language: python # running travis ci for python
 python:
-#  - "2.6" too old
-#  - "2.7" too old
   - "3.5"
   - "3.6"  
   - "3.7-dev"  # not supported yet; use the dev instead  
 install:
   - pip install -r requirements.txt
-#env: not needed anymore
-#  - MAIN_DIR='/home/travis/build/lfko/languaid' 
-#script: 
-#  - PYTHONPATH=./ python python/languaid/test/test_all.py
-#before_deploy:
-#  - python setup.py sdist --formats=gztar, zip
 addons:
   sonarcloud:
     organization: "lfko-github" # the key of the org you chose at step #3
 script:
   # other script steps might be done before running the actual analysis
-  - PYTHONPATH=./ python python/languaid/test/test_all.py
-  - python setup.py sdist --formats=gztar,zip
-  - sonar-scanner
+  - PYTHONPATH=./ python python/languaid/test/test_all.py # run all unit tests at once
+  - python setup.py sdist --formats=gztar,zip # pseudo build bc. there is no actual deployment
+  - sonar-scanner # sonarcloud.io
