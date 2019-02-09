@@ -5,13 +5,13 @@
     @summary: 
 '''
 
-# from distutils.command.build_ext import build_ext
-# from distutils.errors import CCompilerError, DistutilsExecError, DistutilsPlatformError
-
 try:
-    from setuptools import setup, Extension, Command
+    from setuptools import setup, Extension, Command, find_packages
 except ImportError:
     from distutils.core import setup, Extension, Command
+
+with open("README.MD", "r") as fh:
+    long_description = fh.read()
 
 VERSION = '0.0.1'
 DESCRIPTION = "A tool providing support when learning a language"
@@ -23,8 +23,11 @@ setup(
         name="LanguAid",
         version=VERSION,
         description=DESCRIPTION,
+        long_description=long_description,
         python_requires=PYTHON_REQUIRES,
-        author="Florian 'lefko' Becker",
+        author="Florian Becker",
+        author_email="lefko@inbox.lv",
         url="https://github.com/lfko/languaid",
-        packages=['python'],
-        platforms=['any'])
+        packages=find_packages(exclude=('python.languaid.test',)),
+        scripts=['run_app.sh'],
+        platforms=['linux'])
