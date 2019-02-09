@@ -38,7 +38,7 @@ class Verb():
         word_stem = word.replace('mak', '').replace('mek', '')
 
         buildRule = "'" + word_stem + "'"
-
+        print(args)
         for arg in args:
 
             suffix = self.rl.find(arg)

@@ -197,6 +197,16 @@
 						"d_l-r"
 					]
 				}
+			],
+			
+			"infinitive":[
+				{
+					"category":"times",
+					"type":"construct",
+					"items":[
+						"m-k"
+					]
+				}
 			]
 		}
 	],
@@ -343,15 +353,28 @@
 							"y*-y_m|y*-l_m":"voluntative",
 							"y*-c-[ğk]":"futur",
 							"_yor":"present",
-							"[td]_":"past",
+							".{+}[td]_":"past",
 							"_m|s*_n|\\W|_[zk]|s*_n_z|l-r":"person"
 						}					
 					],
+					"verb_order":[
+						"negation",
+						"reciprocal",
+						"voluntative",
+						"past",
+						"present",
+						"futur",
+						"person"
+					],
 					"noun":[
 						{
-							"l-r":"plural",
-							"_m|_n|%_|_m_z|_n_z|l-r_":"possession"
+							"_m|_n|%_|_m_z|_n_z|l-r_":"possession",
+							"l-r":"plural"
 						}
+					],
+					"noun_order":[
+						"plural",
+						"possession"
 					]	
 				}
 			]

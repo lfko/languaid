@@ -13,27 +13,37 @@ def deconstruct(word, wordType):
         @param wordType: type of the word (e.g. verb or noun) 
         @return: a dict containing the found suffixes
     """
+    
+    if('' in (word, wordType)):
+        raise ValueError('No parameters supplied!')
+    
     import re
     from python.languaid.core.util.ruleLoader import RuleLoader
     
     found_suffixes = []
     
-    suffix_order = RuleLoader().getSuffixOrder(wordType, 'deconstruct')  # load the building rules for verbs
+    rules = RuleLoader().getSuffixOrder(wordType, 'deconstruct')  # load the building rules
+    suffix_order = RuleLoader().getSuffixOrder(wordType + '_order', 'deconstruct')
+    suffix_order = suffix_order[::-1]
 
-    for key, value in suffix_order[0].items():
+    for suf in suffix_order:
+        d = dict((k, v) for k, v in rules[0].items() if v == suf)
 
-        # suffixes = self.rl.find([order])
-        
-        # for s in suffixes:
-        # replace the vowel wildcard characters with a '.' so we can use regex
-        s_tmp = key.replace('-', '.').replace('_', '.')
-        suffixes = s_tmp.split('|')
-        for s in suffixes:
-            # look for a match at the end of the word string
-            if re.search(r"(" + s + ")", word):
-                found_suffixes.append(value)  # adds the found suffix to the dict of suffixes
-                # word = word[:-len(s)]  # removes the ending from the noun
-                break
+        for k, v in d.items():
+
+            # replace the vowel wildcard characters with a '.' so we can use regex
+            s_tmp = k.replace('-', '.').replace('_', '.')
+            suffixes = s_tmp.split('|')
+            
+            for i, s in enumerate(suffixes):
+                # look for a match at the end of the word string
+
+                if re.search(r"(" + s + ")$", word):
+                    found_suffixes.append(v)  # adds the found suffix to the dict of suffixes
+                    if v in ['possession', 'person']:
+                        found_suffixes.append(i)
+
+                    word = re.sub(s, '', word)  # removes the ending from the noun
+                    break
     
-    # print(found_suffixes)
     return found_suffixes

@@ -43,9 +43,7 @@ class GuiController():
             @param word: word to check/deconstruct
             @param wtype: verb or noun 
         '''
-        a = deconstruct(word, wtype)
-        print(a)
-        # self.verb_modes
+        return deconstruct(word, wtype)
     
     def translate(self, word, src_lang, target_lang):
         '''

@@ -138,7 +138,25 @@ def __translate__():
 
 
 def __check__():
-    pass
+    """ """
+    from python.languaid.core.util.util import deconstruct
+
+    print(' check called ')
+
+    while(True):
+        word = input(
+            '>> enter a word to check (or "menu" to get back to the main menu) ').strip()
+
+        if word == 'menu':
+            break
+
+        wtype = input('Type (verb, noun)?').lower().strip()
+
+        print('summary: {}, from {} to {}'.format(word, wtype))
+        print('deconstruction: ', deconstruct(word, wtype))
+
+    # called if while() was broken
+    app_as_cli()
 
 
 def __exit__(self, exception_type, exception_value, traceback):

@@ -24,9 +24,9 @@ class LangCoreVerbTest(unittest.TestCase):
     def testVerbConstructPresent(self):
 
         vb = Verb()
-        self.assertEqual(vb.construct('kullanmak', [['mode', Enums().Modes.negation.name], ['tense', Enums().Tenses.present.name, 5]]), 'kullanmıyorlar')
-        self.assertEqual(vb.construct('yürümek', [['mode', Enums().Modes.negation.name], ['tense', Enums().Tenses.present.name, 2]]) , 'yürümüyor')
-        self.assertEqual(vb.construct('okumak', [['mode', Enums().Modes.negation.name], ['tense', Enums().Tenses.present.name, 3]]) , 'okumuyoruz')
+        self.assertEqual(vb.construct('kullanmak', [['mode', Enums().VModes.negation.name], ['tense', Enums().Tenses.present.name, 5]]), 'kullanmıyorlar')
+        self.assertEqual(vb.construct('yürümek', [['mode', Enums().VModes.negation.name], ['tense', Enums().Tenses.present.name, 2]]) , 'yürümüyor')
+        self.assertEqual(vb.construct('okumak', [['mode', Enums().VModes.negation.name], ['tense', Enums().Tenses.present.name, 3]]) , 'okumuyoruz')
         self.assertEqual(vb.construct('söylemek', [['tense', Enums().Tenses.present.name, 4]]) , 'söylüyorsunuz')
         self.assertEqual(vb.construct('aramak', [['tense', Enums().Tenses.present.name, 5]]), 'arıyorlar')
         self.assertEqual(vb.construct('yürümek', [['tense', Enums().Tenses.present.name, 3]]), 'yürüyoruz')
@@ -35,8 +35,8 @@ class LangCoreVerbTest(unittest.TestCase):
 
         vb = Verb()
         self.assertEqual(vb.construct('kullanmak', [['tense', Enums().Tenses.past.name, 0]]), 'kullandım')
-        self.assertEqual(vb.construct('aramak', [['mode', Enums().Modes.negation.name], ['tense', Enums().Tenses.past.name, 4]]), 'aramadınız')
-        self.assertEqual(vb.construct('dilmek', [['mode', Enums().Modes.negation.name], ['tense', Enums().Tenses.past.name, 0]]), 'dilmedim')
+        self.assertEqual(vb.construct('aramak', [['mode', Enums().VModes.negation.name], ['tense', Enums().Tenses.past.name, 4]]), 'aramadınız')
+        self.assertEqual(vb.construct('dilmek', [['mode', Enums().VModes.negation.name], ['tense', Enums().Tenses.past.name, 0]]), 'dilmedim')
 
     def testVerbConstructFutur(self):
 
@@ -55,15 +55,18 @@ class LangCoreVerbTest(unittest.TestCase):
         self.assertEqual(Verb().construct('gelmek', [['mode', Enums().Imperative.imperative.name, 0]]), 'gel')
         self.assertEqual(Verb().construct('okumak', [['mode', Enums().Imperative.imperative.name, 1]]), 'okuyun')
         self.assertEqual(Verb().construct('gelmek', [['mode', Enums().Imperative.imperative.name, 1]]), 'gelin')
-        self.assertEqual(Verb().construct('demek', [['mode', Enums().Modes.negation.name], ['mode', Enums().Imperative.imperative.name, 0]]), 'deme')     
-        self.assertEqual(Verb().construct('etmek', [['mode', Enums().Modes.negation.name], ['mode', Enums().Imperative.imperative.name, 1]]), 'etmeyin')  
+        self.assertEqual(Verb().construct('demek', [['mode', Enums().VModes.negation.name], ['mode', Enums().Imperative.imperative.name, 0]]), 'deme')     
+        self.assertEqual(Verb().construct('etmek', [['mode', Enums().VModes.negation.name], ['mode', Enums().Imperative.imperative.name, 1]]), 'etmeyin')  
 
     def testVerbDeconstruct(self):
 
         from python.languaid.core.util.util import deconstruct
-        # self.assertEqual(vb.deconstruct('yiyeyim'), [vb.Imperative.voluntative.name])
-        self.assertEqual(deconstruct('geliyorum', 'verb'), [Enums().Tenses.present.name, 'person'])
-        self.assertEqual(deconstruct('geleceğin', 'verb'), [Enums().Tenses.futur.name, 'person'])
+        # self.assertEqual(deconstruct('yiyeyim', 'verb'), [Enums().Imperative.voluntative.name])
+        self.assertEqual(deconstruct('geliyorum', 'verb'), ['person', 0 , Enums().Tenses.present.name])
+        self.assertEqual(deconstruct('geleceğin', 'verb'), ['person', 1, Enums().Tenses.futur.name])
+        with self.assertRaises(ValueError):
+            deconstruct('', None)
+            deconstruct(None, None)
         
     def tearDown(self):
 

@@ -16,6 +16,7 @@ class Enums():
     Tenses = Enum('Tenses', 'past present futur')
     WTypes = Enum('WTypes', 'noun verb')
     Imperative = Enum('Imperative', 'voluntative imperative')  # not used
+    Languages = Enum('Languages', 'en tr')  # supported languages
 
     def getAllEnums(self):
         '''

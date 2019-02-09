@@ -12,6 +12,7 @@ from python.languaid.core.gui.languaidGuiController import GuiController
 
 class LanguaidGUI():
     """
+        @summary: GUI class using tkinter
     """
     
     def __init__(self, master):
@@ -23,7 +24,7 @@ class LanguaidGUI():
         self.gc = GuiController()
                 
         nb = ttk.Notebook(master)
-        nb.grid(row=10, column=10, columnspan=50, rowspan=49)
+        nb.grid(row=5, column=5, columnspan=50, rowspan=49)
 
         welcome_frame = ttk.Frame(nb)
         welcome_frame.pack()
@@ -57,17 +58,27 @@ class LanguaidGUI():
 
     def __change_state__(self):
         '''
+            @summary: changing state of the mode RadioButtons from disabled to normal and vice versa
         '''
         if(self.v_mode.get() in ['imperative', 'voluntative']):
             for c in self.tense_buttons:
                 c.configure(state='disabled')
+                c.deselect()
+            for c in self.number_buttons:
+                c.configure(state='disabled')
+                c.deselect()
+                
+            self.v_number.set(0)
         else:
             for c in self.tense_buttons:
+                c.configure(state='normal')
+            for c in self.number_buttons:
                 c.configure(state='normal')
 
     def __initVerbFrame__(self, verb_frame):
         '''
             @summary: Verb Frame; There are some special fields, which need to be initialised separately
+            @param verb_frame: Frame
         '''
 
         self.input_verb = tkinter.Entry(verb_frame)
@@ -75,17 +86,19 @@ class LanguaidGUI():
         
         self.tense_buttons = []
         self.mode_buttons = []
+        self.number_buttons = []
         
-        self.mode_vars = []
+        # RadioButton for selecting if infintive should be constructed
+        self.v_tense = tkinter.StringVar()
+        self.infintive_rButton = tkinter.Checkbutton(verb_frame, variable=self.v_tense, onvalue='infinitive', text='infinitive', command=self.__change_state__)
+        self.infintive_rButton.pack()
+        
         self.v_mode = tkinter.StringVar()
         for mode in self.gc.verb_modes:
-            # tkinter.Checkbutton(verb_frame, text=mode, variable=self.gc.verb_modes[i]).pack()
             c = tkinter.Radiobutton(verb_frame, variable=self.v_mode, value=mode, text=mode, command=self.__change_state__)
-            c.pack(anchor=tkinter.E)
+            c.pack()
             self.mode_buttons.append(c)
-            self.mode_vars.append(self.v_mode)
         
-        self.v_tense = tkinter.StringVar()
         for tense in self.gc.verb_tenses:
             c = tkinter.Radiobutton(verb_frame, variable=self.v_tense, value=tense, text=tense)
             c.pack(anchor=tkinter.W)
@@ -93,7 +106,9 @@ class LanguaidGUI():
         
         self.v_number = tkinter.IntVar()
         for i in range(6):
-            tkinter.Radiobutton(verb_frame, variable=self.v_number, value=i, text=i).pack(anchor=tkinter.E)
+            c = tkinter.Radiobutton(verb_frame, variable=self.v_number, value=i, text=i)
+            c.pack()
+            self.number_buttons.append(c)
         
         self.build_verb_button = tkinter.Button(verb_frame, text='Build verb', command=self.__constructVerb__)
         self.build_verb_button.pack(side=tkinter.BOTTOM)
@@ -108,6 +123,7 @@ class LanguaidGUI():
     def __initTranslateFrame__(self, trans_frame):
         '''
             @summary: Translate Frame
+            @param trans_frame: Frame
         '''
         
         self.trans_entry = tkinter.Entry(trans_frame)
@@ -123,6 +139,7 @@ class LanguaidGUI():
     def __initNounFrame__(self, noun_frame):
         '''
             @summary: Noun Frame; There are some special fields, which need to be initialised separately
+            @param noun_frame: Frame
         '''
 
         self.input_noun = tkinter.Entry(noun_frame)
@@ -151,13 +168,10 @@ class LanguaidGUI():
         self.output_noun = tkinter.Label(noun_frame, text='Noun will go here!', textvariable=self.outNoun).pack(side=tkinter.RIGHT)
 
     def __printAbout__(self):
-        '''
-        '''
         messagebox.showinfo('About', 'LanguAid version 1.0, author Florian Becker (885187), http://github.com/lfko')
     
     def __reset__(self):
-        '''
-        '''
+        # deselect any selected mode RadioButtons 
         [c.deselect() for c in self.mode_buttons]
     
     def __translate__(self):
@@ -170,11 +184,9 @@ class LanguaidGUI():
     
     def __constructNoun__(self):
         '''
-            @summary: 
+            @summary: function for calling the controller to construct a noun
         '''
-        # if self.n_mode.get() == '':
-        #    messagebox.showwarning('Warning', 'Not enough parameters supplied!')
-        # else:
+
         if self.n_number.get() != '':
             args = [['number', self.n_number.get()]]
         if self.n_mode.get() != '':
@@ -185,7 +197,7 @@ class LanguaidGUI():
         
     def __constructVerb__(self):
         '''
-            @summary:
+            @summary: function for calling the controller to construct a verb
         '''
         if(self.input_verb.get() == ''):
             messagebox.showwarning('Warning', 'No word has been inputted!')            
@@ -197,15 +209,16 @@ class LanguaidGUI():
 
     def __checkVerb__(self):
         '''
-            @summary: 
+            @summary: checks the components of a noun
         '''
-        self.gc.checkWord(self.input_verb.get(), 'verb')
+        messagebox.showinfo('CheckVerb', 'verb consists of the following blocks: ' + str(self.gc.checkWord(self.input_verb.get(), 'verb')))
     
     def __checkNoun__(self):
         '''
-            @summary: 
+            @summary: checks the components of a verb
         '''
-        self.gc.checkWord(self.input_verb.get(), 'noun')
+        messagebox.showinfo('CheckNoun', 'noun consists of the following blocks: ' + str(self.gc.checkWord(self.input_noun.get(), 'noun')))
+        # self.gc.checkWord(self.input_verb.get(), 'noun')
 
 
 # root window widget - must be generated before anything else
@@ -215,4 +228,3 @@ mainGui = LanguaidGUI(root)
 # starts the actual execution
 # mainloop will be executed indefinetly long, until we close the window
 root.mainloop()
-# root.destroy()
