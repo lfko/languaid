@@ -19,5 +19,5 @@ addons:
 script:
   # other script steps might be done before running the actual analysis
   - PYTHONPATH=./ python python/languaid/test/test_all.py
-  - python setup.py sdist --formats=gztar, zip
+  - python setup.py sdist --formats=gztar,zip
   - sonar-scanner
