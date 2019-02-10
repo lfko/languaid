@@ -11,17 +11,12 @@ import python.languaid.core.lang.translate as tr
 
 
 class GuiController():
-    '''
-    classdocs
-    '''
 
     def __init__(self):
-        '''
-            Constructor
-        '''
-        
+
         self.vb = Verb()
         self.n = Noun()
+        # we need to access these properties in the GUI class, therefore we are forwarding them here in the controller
         self.verb_modes = [m for m in self.vb.Modes]
         self.verb_tenses = [t for t in self.vb.Tenses]
         self.noun_modes = [m for m in self.n.Modes]
@@ -29,12 +24,16 @@ class GuiController():
         
     def constructVerb(self, word, args):
         '''
+            @param word: a verb in infinitive form
             @param args: List of arguments; arguments itself are lists distinct parameters
+            
         '''
         return self.vb.construct(word, args)
         
     def constructNoun(self, word, args):
         '''
+            @param word: a noun
+            @param args: List of arguments; arguments itself are lists distinct parameters
         '''
         return self.n.construct(word, args)
 
@@ -47,5 +46,8 @@ class GuiController():
     
     def translate(self, word, src_lang, target_lang):
         '''
+            @param word: the word to translate
+            @param src_lang: source lang, abbreviated (e.g. en)
+            @param target_lang: dito
         '''
         return tr.translate(word, src_lang, target_lang)
