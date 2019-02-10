@@ -2,7 +2,7 @@
     Created on Dec 30, 2018
 
     @author: lfko
-    @summary: 
+    @summary: Module which is used during the vowel harmonization
 '''
 from python.languaid.core.util.ruleLoader import RuleLoader
 
@@ -10,9 +10,7 @@ from python.languaid.core.util.ruleLoader import RuleLoader
 class VowelHarmonizer():
     
     def __init__(self):
-        """
-        
-        """
+
         self.rl = RuleLoader()
         self.vowels = self.rl.find(['vowels', 'vowels'])
 

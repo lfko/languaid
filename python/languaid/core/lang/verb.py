@@ -2,7 +2,7 @@
     Created on Dec 3, 2018
 
     @author: fb
-    @summary: 
+    @summary: Modul for constructing (conjugating) a valid verb with given parameters
 '''
 
 from python.languaid.core.util.ruleLoader import RuleLoader
@@ -13,9 +13,7 @@ from python.languaid.core.util.enums import Enums
 class Verb():
     
     def __init__(self):
-        """ 
-            @summary: default constructor
-        """
+
         self.vh = VowelHarmonizer()
         self.rl = RuleLoader()
         self.vowels = self.rl.find(['vowels', 'vowels'])
@@ -33,12 +31,13 @@ class Verb():
             raise TypeError('empty word supplied')
         if len(args) == 0 or args == None:
             raise TypeError('empty argument lists supplied')
+        if word[-3:] not in ('mek', 'mak'):
+            raise ValueError('word is not in infinitive form')
 
         # the basic build rule: replace the suffix of the infinitive
         word_stem = word.replace('mak', '').replace('mek', '')
-
         buildRule = "'" + word_stem + "'"
-        print(args)
+
         for arg in args:
 
             suffix = self.rl.find(arg)

@@ -2,7 +2,7 @@
     Created on Dec 6, 2018
 
     @author: fb
-    @summary: 
+    @summary: Module used for constructing a valid noun with the rules supplied
 '''
 
 from python.languaid.core.util.ruleLoader import RuleLoader
@@ -13,12 +13,12 @@ from python.languaid.core.util.enums import Enums
 class Noun():
     
     def __init__(self):
-        '''
-            @summary: default constructor
-        '''
+
         self.vh = VowelHarmonizer()
         self.rl = RuleLoader()
+        # load the valid vowels
         self.vowels = self.rl.find(['vowels', 'vowels'])
+        # load valid modes and numbers for nouns
         self.Number = [e.name for e in Enums().Number]
         self.Modes = [e.name for e in Enums().NModes]
     
