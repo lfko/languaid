@@ -76,8 +76,8 @@ class LanguaidGUI():
         '''
         input_group = tkinter.LabelFrame(verb_frame)
         input_group.grid(row=0, column=0)
-        l = tkinter.Label(input_group, text='Enter your word here', font=("Helvetica", 12))
-        l.grid(row=0, column=0, padx=5, pady=5)
+        tkinter.Label(input_group, text='Enter your word here', font=("Helvetica", 12)).grid(row=0, column=0, padx=5, pady=5)
+        tkinter.Label(input_group, text='Result', font=("Helvetica", 12)).grid(row=1, column=0, padx=5, pady=5)
 
         self.input_verb = tkinter.Entry(input_group)
         self.input_verb.grid(row=0, column=1)
@@ -127,7 +127,7 @@ class LanguaidGUI():
         self.reset_verb_button.grid(row=5, column=2)
         
         self.outVerb = tkinter.StringVar()  # binding a StringVar to the label, so we just have to upate the variable
-        self.output_verb = tkinter.Label(verb_frame, text='Verb will go here!', textvariable=self.outVerb)
+        self.output_verb = tkinter.Label(input_group, text='Verb will go here!', font=("Helvetica", 12), textvariable=self.outVerb)
         self.output_verb.grid(row=1, column=1)
         
     def __initTranslateFrame__(self, trans_frame):
@@ -138,8 +138,8 @@ class LanguaidGUI():
         input_group = tkinter.LabelFrame(trans_frame)
         input_group.grid(row=0, column=0)
         
-        l = tkinter.Label(input_group, text='Enter your word here', font=("Helvetica", 12))
-        l.grid(row=0, column=0, padx=5, pady=5)
+        tkinter.Label(input_group, text='Enter your word here', font=("Helvetica", 12)).grid(row=0, column=0, padx=5, pady=5)
+        tkinter.Label(input_group, text='Translation', font=("Helvetica", 12)).grid(row=1, column=0, padx=5, pady=5)
         
         self.trans_entry = tkinter.Entry(input_group)
         self.trans_entry.grid(row=0, column=1)
@@ -156,8 +156,8 @@ class LanguaidGUI():
         tkinter.Radiobutton(rBtn_group, text="en <> tr", variable=self.lang_opt, value=1).grid(row=1, column=1)
 
         self.outTrans = tkinter.StringVar()
-        self.word_label = tkinter.Label(trans_frame, text="Helvetica", textvariable=self.outTrans, font=("Helvetica", 16))
-        self.word_label.grid(row=4, column=1)
+        self.word_label = tkinter.Label(input_group, text="Helvetica", textvariable=self.outTrans, font=("Helvetica", 12))
+        self.word_label.grid(row=1, column=1)
     
     def __initNounFrame__(self, noun_frame):
         '''
@@ -212,8 +212,11 @@ class LanguaidGUI():
             @summary: Calls the controller for the translation of the inputted word and shows the result in a messagebox
         '''
         trans_word = self.gc.translate(self.trans_entry.get(), self.lang_opts[self.lang_opt.get()][0], self.lang_opts[self.lang_opt.get()][1])
-        messagebox.showinfo('Translation', self.trans_entry.get() + ' -> ' + trans_word)
-        self.outTrans.set(trans_word)
+        if trans_word != None:
+            messagebox.showinfo('Translation', self.trans_entry.get() + ' -> ' + trans_word)
+            self.outTrans.set(trans_word)
+        else:
+            messagebox.showwarning('Translation', 'No translation available!')
     
     def __constructNoun__(self):
         '''
@@ -247,7 +250,9 @@ class LanguaidGUI():
         '''
             @summary: checks the components of a noun
         '''
-        messagebox.showinfo('CheckVerb', 'verb consists of the following blocks: ' + str(self.gc.checkWord(self.input_verb.get(), 'verb')))
+        res = str(self.gc.checkWord(self.input_verb.get(), 'verb'))
+        messagebox.showinfo('CheckVerb', 'verb consists of the following blocks: ' + res)
+        self.outVerb.set(res)
     
     def __checkNoun__(self):
         '''
@@ -258,7 +263,7 @@ class LanguaidGUI():
 
 # root window widget - must be generated before anything else
 root = tkinter.Tk()
-root.geometry("400x250")
+root.geometry("400x300")
 mainGui = LanguaidGUI(root)
 
 # starts the actual execution

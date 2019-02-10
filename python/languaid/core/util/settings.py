@@ -10,9 +10,6 @@ import configparser, pathlib, os
 
 class Settings():
     
-    TRANSLATION_URL = "http://translate.googleapis.com/translate_a/single?client=gtx&sl={}&tl={}&dt=t&q={}"
-    JSON_FILE_NAME = "rules.json"
-    
     def __init__(self):
         """ 
             @summary: default constructor
@@ -24,7 +21,6 @@ class Settings():
         """ 
             @summary:
             @param mainDir: main directory of the application
-            @todo: conceive a suitable mainDir value
         """
         '''
         if mainDir == '':
@@ -53,7 +49,7 @@ class Settings():
     
     def listSections(self):
         """ 
-            @summary: list all currently available sections
+            @summary: list all currently available sections - not yet used
             @todo: return an actual list
             @return: 
         """
@@ -64,7 +60,7 @@ class Settings():
         
     def listKeys(self, section='DEFAULT'):
         """ 
-            @summary: list all keys and corresponding values for a specific section
+            @summary: list all keys and corresponding values for a specific section - not yet used
             @todo: return an actual list
             @return: 
         """

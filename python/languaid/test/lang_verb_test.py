@@ -62,8 +62,8 @@ class LangCoreVerbTest(unittest.TestCase):
 
         from python.languaid.core.util.util import deconstruct
         # self.assertEqual(deconstruct('yiyeyim', 'verb'), [Enums().Imperative.voluntative.name])
-        self.assertEqual(deconstruct('geliyorum', 'verb'), ['person', 0 , Enums().Tenses.present.name])
-        self.assertEqual(deconstruct('geleceğin', 'verb'), ['person', 1, Enums().Tenses.futur.name])
+        self.assertEqual(deconstruct('geliyorum', 'verb'), ['person', 1 , Enums().Tenses.present.name])
+        self.assertEqual(deconstruct('geleceğin', 'verb'), ['person', 2, Enums().Tenses.futur.name])
         with self.assertRaises(ValueError):
             deconstruct('', None)
             deconstruct(None, None)

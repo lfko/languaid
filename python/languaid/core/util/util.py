@@ -41,7 +41,7 @@ def deconstruct(word, wordType):
                 if re.search(r"(" + s + ")$", word):
                     found_suffixes.append(v)  # adds the found suffix to the dict of suffixes
                     if v in ['possession', 'person']:
-                        found_suffixes.append(i)
+                        found_suffixes.append(i + 1)
 
                     word = re.sub(s, '', word)  # removes the ending from the noun
                     break

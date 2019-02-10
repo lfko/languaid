@@ -348,16 +348,18 @@
 				{
 					"verb":[
 						{
+							"m-k":"infinitive",
 							"m[ea]":"negation",
 							"_ş":"reciprocal",
 							"y*-y_m|y*-l_m":"voluntative",
 							"y*-c-[ğk]":"futur",
 							"_yor":"present",
-							".{+}[td]_":"past",
-							"_m|s*_n|\\W|_[zk]|s*_n_z|l-r":"person"
+							"[td]_":"past",
+							"_m|s*_n|\\W|[^ae][zk]|s*_n_z|l-r":"person"
 						}					
 					],
 					"verb_order":[
+						"infinitive",
 						"negation",
 						"reciprocal",
 						"voluntative",

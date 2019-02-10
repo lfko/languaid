@@ -2,7 +2,7 @@
     Created on Dec 6, 2018
 
     @author: lfko
-    @summary: : grammatical rules should be loadable, so that the application has a more universal approach
+    @summary: grammatical rules should be loadable, so that the application has a more universal approach
 
 '''
 
@@ -13,11 +13,6 @@ from python.languaid.core.util.settings import Settings
 class RuleLoader():
 
     def __init__(self):
-        """ 
-            @summary: default constructor
-            @param category: name of the category, for which the rules should be loaded
-            @return: dictionary containing the specific rules
-        """
         
         self.appSet = Settings()
 
@@ -70,9 +65,8 @@ class RuleLoader():
 
     def getSuffixOrder(self, wordType, category):
         """ 
-            @summary: 
             @param wordType:
-            @return:  
+            @return: Order of the applicable suffixes as a list
         """
         suffixOrder = self.data[category][0]['order'][0][wordType]
         return suffixOrder
