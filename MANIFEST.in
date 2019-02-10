@@ -1,0 +1,4 @@
+# shows which non-python files should be added by distutils during the build
+include rules.json
+include settings.ini
+recursive-include python *.txt
