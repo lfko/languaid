@@ -6,6 +6,6 @@ with given parameters (e.g. tense or person) or check a noun/verb for its validi
 1. Checkout the repository (or download the latest archive from the dist folder)
 2. Exctract the package into a folder of choice
 3. Run `run_app.sh` and choose either to use `gui` or `cli`
-3b. If mandatory edit the run script to use the latest python version
+4. If mandatory edit the run script to use the latest python version
 
 (_Application was tested using python >= 3.5_)
