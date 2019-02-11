@@ -57,13 +57,13 @@ class LangCoreNounTest(unittest.TestCase):
     def testNounDeconstruct(self):
 
         from python.languaid.core.util.util import deconstruct
-        self.assertEqual(deconstruct('otobüsleri', 'noun'), ['possession', 5])
-        self.assertEqual(deconstruct('otobüsüm', 'noun'), ['possession', 0])
-        self.assertEqual(deconstruct('otobüsün', 'noun'), ['possession', 1])
-        self.assertEqual(deconstruct('kızımız', 'noun'), ['possession', 3])
-        self.assertEqual(deconstruct('cantalarım', 'noun'), ['possession', 0, 'plural'])
-        self.assertEqual(deconstruct('arabaların', 'noun'), ['possession', 1, 'plural'])
-        self.assertEqual(deconstruct('arabaları', 'noun'), ['possession', 5])
+        self.assertEqual(deconstruct('otobüsleri', 'noun'), ['possession', 6])
+        self.assertEqual(deconstruct('otobüsüm', 'noun'), ['possession', 1])
+        self.assertEqual(deconstruct('otobüsün', 'noun'), ['possession', 2])
+        self.assertEqual(deconstruct('kızımız', 'noun'), ['possession', 4])
+        self.assertEqual(deconstruct('cantalarım', 'noun'), ['possession', 1, 'plural'])
+        self.assertEqual(deconstruct('arabaların', 'noun'), ['possession', 2, 'plural'])
+        self.assertEqual(deconstruct('arabaları', 'noun'), ['possession', 6])
         
     def tearDown(self):
 
